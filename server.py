@@ -1,4 +1,4 @@
-import httpx
+import requests
 import codecs
 from dataclasses import dataclass
 from pydantic import BaseModel, Field
@@ -67,7 +67,7 @@ async def user(request: Request):
     # return {"answer": response}
     params = {"message": response, "client_id": user_id}
     url = f'https://chatter.salebot.pro/api/{api_key}/message'
-    request = httpx.post(url, json=params)
+    request = requests.post(url, json=params)
     print(await request.body())
 if __name__ == "__main__":
     uvicorn.run(app, host='0.0.0.0', port=8000, root_path="/api_v2")
