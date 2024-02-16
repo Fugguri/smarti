@@ -1,5 +1,5 @@
 import os
-from .GPTService import GPTService
+# from .GPTService import GPTService
 from .AssistantService import AssistantService
 from .GoogleService import GoogleService
 from config import cfg
