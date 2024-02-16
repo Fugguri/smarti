@@ -69,6 +69,6 @@ async def user(request_: Request):
     params = {"message": response, "client_id": user_id}
     url = f'https://chatter.salebot.pro/api/{api_key}/message'
     req = requests.post(url, json=params)
-    print(req.text())
+    print(req.text)
 if __name__ == "__main__":
     uvicorn.run(app, host='0.0.0.0', port=8000, root_path="/api_v2")
