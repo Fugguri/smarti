@@ -58,6 +58,7 @@ async def user(request: Request):
 
 @app.post("/smarti", name="Wellcome", tags=["Основное"], description="Тут будет описание методов?")
 async def user(request_: Request):
+    print(await request_.body())
     data = await request_.json()
     user_id = data.get("user_id")
     message = Message(text=data.get("message"))
@@ -69,6 +70,6 @@ async def user(request_: Request):
     params = {"message": response, "client_id": user_id}
     url = f'https://chatter.salebot.pro/api/{api_key}/message'
     req = requests.post(url, json=params)
-    print(req.text)
+    print(req)
 if __name__ == "__main__":
     uvicorn.run(app, host='0.0.0.0', port=8000, root_path="/api_v2")
