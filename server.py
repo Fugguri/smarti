@@ -48,8 +48,9 @@ async def user():
 
 
 @app.post("/smarti/start", name="Wellcome", tags=["Основное"], description="Тут будет описание методов?")
-async def user(request: Request):
-    data = await request.json()
+async def user(request_: Request):
+    print(await request_.body())
+    data = await request_.json()
     user_id = data.get("user_id")
     message = Message(text=data.get("message"))
     api_key = data.get("api_key")
