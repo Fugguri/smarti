@@ -63,6 +63,8 @@ async def user(request_: Request):
     data = await request_.json()
     user_id = data.get("user_id")
     message = Message(text=data.get("message"))
+    if not message:
+        return
     api_key = data.get("api_key")
     print(data)
     # print(await request.json())
