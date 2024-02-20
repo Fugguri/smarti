@@ -75,15 +75,13 @@ async def user(request_: Request):
         return
     api_key = data.get("api_key")
     print(data)
-    bot.__
+
     mes = await bot.send_message(telegram_id, "Набираю сообщение...")
 
     response = await assistant.request(message, client_id, api_key=api_key)
-    await salebot.sync_send_message(api_key=api_key, client_id=client_id, message=response)
-    data = {"client.name": "some name", "client.email": "some@email.com",
-            "client.goal": "some client goal"}
-    await salebot.sync_save_variables(api_key=api_key, client_id=client_id, variables=data)
     await bot.delete_message(mes.chat.id, mes.message_id)
+    await salebot.sync_send_message(api_key=api_key, client_id=client_id, message=response)
+
 
 if __name__ == "__main__":
     uvicorn.run(app, host='0.0.0.0', port=8000, root_path="/api_v2")
