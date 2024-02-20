@@ -78,7 +78,7 @@ async def user(request_: Request):
     bot.__
     mes = await bot.send_message(telegram_id, "Набираю сообщение...")
 
-    response = await assistant.request(message, client_id)
+    response = await assistant.request(message, client_id, api_key=api_key)
     await salebot.sync_send_message(api_key=api_key, client_id=client_id, message=response)
     data = {"client.name": "some name", "client.email": "some@email.com",
             "client.goal": "some client goal"}

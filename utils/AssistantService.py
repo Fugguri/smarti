@@ -1,3 +1,4 @@
+import json
 from .SaleBotService import SalebotService
 import re
 from openai import OpenAI
@@ -5,6 +6,7 @@ import os
 import asyncio
 import httpx
 proxy_url = "http://9gfWr9:g0LSUy@131.108.17.194:9799/"
+salebot = SalebotService()
 
 
 class AssistantService:
@@ -187,39 +189,39 @@ class AssistantService:
                        "parameters": {
                             "type": "object",
                             "properties": {
-                                "education_goal": {
+                                "client.education_goal": {
                                     "type": "string",
                                     "description": "education_goal"
                                 },
-                                "work_with": {
+                                "client.work_with": {
                                     "type": "string",
                                     "description": "what category of people does he want to work with "
                                 },
-                                "Education_important": {
+                                "client.Education_important": {
                                     "type": "string",
                                     "description": "what is important in learning"
                                 },
-                                "personal_improvements_goals": {
+                                "client.personal_improvements_goals": {
                                     "type": "string",
                                     "description": "Questions that he wants to solve in the process of personal development"
                                 },
-                                "budget": {
+                                "client.budget": {
                                     "type": "string",
                                     "description": "education budget"
                                 },
-                                "start_education": {
+                                "client.start_education": {
                                     "type": "string",
                                     "description": "when plan start educate"
                                 },
-                                "name": {
+                                "client.name": {
                                     "type": "string",
                                     "description": "lead name"
                                 },
-                                "phone": {
+                                "client.phone": {
                                     "type": "string",
                                     "description": "lead phone"
                                 },
-                                "email": {
+                                "client.email": {
                                     "type": "string",
                                     "description": "lead email"
                                 },
@@ -266,7 +268,7 @@ class AssistantService:
             thread = self.users_threads[chat_id]
         return thread
 
-    async def request(self, message, chat_id, start: bool = False):
+    async def request(self, message, chat_id, start: bool = False, api_key=None):
         thread = self.__get_thread(chat_id=chat_id)
         print(2)
         ready = False
@@ -308,11 +310,11 @@ class AssistantService:
             counter += 1
             action = retrieve.required_action
             if action:
-                import json
                 data = action.submit_tool_outputs.tool_calls[0].function.arguments
                 json_acceptable_string = data.replace("'", "\"")
                 lead = json.loads(json_acceptable_string)
                 print(lead)
+                await salebot.sync_save_variables(api_key=api_key, client_id=chat_id, variables=lead)
                 # await message.bot.send_message(-1002137202749, action.submit_tool_outputs.tool_calls[0].function.arguments)
                 # await google.save_lead(lead)
                 print(self.submin_function(
