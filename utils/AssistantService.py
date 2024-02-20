@@ -1,11 +1,10 @@
-from .GoogleService import GoogleService
+from .SaleBotService import SalebotService
 import re
 from openai import OpenAI
 import os
 import asyncio
 import httpx
 proxy_url = "http://9gfWr9:g0LSUy@131.108.17.194:9799/"
-google = GoogleService()
 
 
 class AssistantService:
@@ -315,7 +314,7 @@ class AssistantService:
                 lead = json.loads(json_acceptable_string)
                 print(lead)
                 # await message.bot.send_message(-1002137202749, action.submit_tool_outputs.tool_calls[0].function.arguments)
-                await google.save_lead(lead)
+                # await google.save_lead(lead)
                 print(self.submin_function(
                     thread, run, action.submit_tool_outputs.tool_calls[0]))
             status = retrieve.completed_at

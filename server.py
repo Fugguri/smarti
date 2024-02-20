@@ -5,7 +5,13 @@ from pydantic import BaseModel, Field
 from fastapi import FastAPI, Request, logger
 import uvicorn
 from fastapi.middleware.cors import CORSMiddleware
-from utils import assistant
+from utils import assistant, salebot
+from aiogram import Bot
+from config import load_config
+
+config = load_config("config/config.json", "config/texts.yml")
+bot = Bot(token=config.tg_bot.token, parse_mode='HTML')
+
 app = FastAPI(
     title="Neur",
     summary="",
@@ -47,32 +53,37 @@ async def user():
     return {"message": "success"}
 
 
-@app.post("/smarti/start", name="Wellcome", tags=["Основное"], description="Тут будет описание методов?")
+@app.post("/smarti/start", name="Wellcome")
 async def user(request_: Request):
-    print(await request_.body())
     data = await request_.json()
-    user_id = data.get("user_id")
+    client_id = data.get("user_id")
     message = Message(text=data.get("message"))
     api_key = data.get("api_key")
-    response = await assistant.request(message, user_id, start=True)
+
+    mes = await salebot.sync_send_message(api_key=api_key, client_id=client_id, message=config.misc.messages.start)
+    await assistant.request(message, client_id, start=True)
 
 
-@app.post("/smarti", name="Wellcome", tags=["Основное"], description="Тут будет описание методов?")
+@app.post("/smarti")
 async def user(request_: Request):
     print(await request_.body())
     data = await request_.json()
-    user_id = data.get("user_id")
+    client_id = data.get("user_id")
+    telegram_id = data.get("telegram_id")
     message = Message(text=data.get("message"))
     if not message:
         return
     api_key = data.get("api_key")
     print(data)
-    # print(await request.json())
-    response = await assistant.request(message, user_id)
-    # return {"answer": response}
-    params = {"message": response, "client_id": user_id}
-    url = f'https://chatter.salebot.pro/api/{api_key}/message'
-    req = requests.post(url, json=params)
-    print(req)
+    bot.__
+    mes = await bot.send_message(telegram_id, "Набираю сообщение...")
+
+    response = await assistant.request(message, client_id)
+    await salebot.sync_send_message(api_key=api_key, client_id=client_id, message=response)
+    data = {"client.name": "some name", "client.email": "some@email.com",
+            "client.goal": "some client goal"}
+    await salebot.sync_save_variables(api_key=api_key, client_id=client_id, variables=data)
+    await bot.delete_message(mes.chat.id, mes.message_id)
+
 if __name__ == "__main__":
     uvicorn.run(app, host='0.0.0.0', port=8000, root_path="/api_v2")
