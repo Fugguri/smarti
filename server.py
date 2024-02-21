@@ -73,9 +73,11 @@ async def user(request_: Request):
     message = Message(text=data.get("message"))
     if not message:
         return
+    if message == "/start":
+        mes = await salebot.sync_send_message(api_key=api_key, client_id=client_id, message=config.misc.messages.start)
+        await assistant.request(message, client_id, start=True)
+        return
     api_key = data.get("api_key")
-    print(data)
-
     mes = await bot.send_message(telegram_id, "Набираю сообщение...")
 
     response = await assistant.request(message, client_id, api_key=api_key)
