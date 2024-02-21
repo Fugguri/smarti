@@ -59,7 +59,7 @@ async def user(request_: Request):
     client_id = data.get("user_id")
     message = Message(text=data.get("message"))
     api_key = data.get("api_key")
-
+    print(await request_.body())
     mes = await salebot.sync_send_message(api_key=api_key, client_id=client_id, message=config.misc.messages.start)
     await assistant.request(message, client_id, start=True)
 
@@ -71,10 +71,11 @@ async def user(request_: Request):
     client_id = data.get("user_id")
     telegram_id = data.get("telegram_id")
     message = Message(text=data.get("message"))
+    print(message)
     if not message:
         return
     if message == "/start":
-        mes = await salebot.sync_send_message(api_key=api_key, client_id=client_id, message=config.misc.messages.start)
+        await salebot.sync_send_message(api_key=api_key, client_id=client_id, message=config.misc.messages.start)
         await assistant.request(message, client_id, start=True)
         return
     api_key = data.get("api_key")
