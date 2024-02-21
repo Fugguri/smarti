@@ -74,7 +74,7 @@ async def user(request_: Request):
     print(message)
     if not message:
         return
-    if message.text == "/start":
+    if message.text == '/start':
         await salebot.sync_send_message(api_key=api_key, client_id=client_id, message=config.misc.messages.start)
         await assistant.request(message, client_id, start=True)
         return
