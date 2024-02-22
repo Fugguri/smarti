@@ -205,7 +205,7 @@ class AssistantService:
                                     "type": "string",
                                     "description": "Questions that he wants to solve in the process of personal development"
                                 },
-                                "client.budget": {
+                                "client.budget_ii": {
                                     "type": "string",
                                     "description": "education budget"
                                 },

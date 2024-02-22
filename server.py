@@ -71,8 +71,8 @@ async def user(request_: Request):
     client_id = data.get("user_id")
     telegram_id = data.get("telegram_id")
     message = Message(text=data.get("message"))
-    api_key = data.get("api_key")
     print(message)
+    api_key = data.get("api_key")
     if not message:
         return
     if message.text == '/start':
