@@ -79,7 +79,7 @@ class AssistantService:
 3. Работа с зависимостями и расстройствами (Клинический психолог)
 4. Консультирование родителей и детей (Детский психолог)
 5. Карьерные запросы (Практический психолог)
-6. Хотела бы работать с широким спектром методик (Практический психолог)
+6. Хотел(а) бы работать с широким спектром методик (Практический психолог)
 
 Если выбрал личное развитие: 
 
@@ -285,7 +285,7 @@ class AssistantService:
 
             except Exception as ex:
                 print(ex)
-                await asyncio.sleep(1)
+                await asyncio.sleep(10)
 
         print(3)
 
@@ -322,12 +322,11 @@ class AssistantService:
                 print(self.submin_function(
                     thread, run, action.submit_tool_outputs.tool_calls[0]))
             status = retrieve.completed_at
-            await asyncio.sleep(1)
+            await asyncio.sleep(10)
 
         messages = self.openai.beta.threads.messages.list(
             thread_id=thread.id
         )
-
         answer = self.__get_answer_from_messages(messages, user_message.id)
         print(answer)
         if not answer:
