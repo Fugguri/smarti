@@ -12,9 +12,10 @@ class SalebotService:
         async with aiohttp.ClientSession() as session:
             params = {"client_id": client_id, "variables": variables}
             url = self.base_url.format(
-                api_key=api_key, action="save_variables")
+                api_key=api_key,
+                action="save_variables")
 
-            async with session.post(url, data=params) as req:
+            async with session.post(url, json=params) as req:
                 print(await req.text())
                 return req
 
@@ -22,6 +23,7 @@ class SalebotService:
         params = {"client_id": client_id, "variables": variables}
         url = self.base_url.format(api_key=api_key, action="save_variables")
         req = requests.post(url, json=params)
+        print(req.text)
         return req
 
     async def sync_send_message(self, api_key, client_id, message: str):
