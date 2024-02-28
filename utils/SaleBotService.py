@@ -9,6 +9,7 @@ class SalebotService:
         self.base_url = 'https://chatter.salebot.pro/api/{api_key}/{action}'
 
     async def sync_save_variables(self, api_key, client_id, variables: dict):
+
         async with aiohttp.ClientSession() as session:
             params = {"client_id": client_id, "variables": variables}
             url = self.base_url.format(
