@@ -79,10 +79,15 @@ async def user(request_: Request):
         await salebot.sync_send_message(api_key=api_key, client_id=client_id, message=config.misc.messages.start)
         await assistant.request(message, client_id, start=True)
         return
-    mes = await bot.send_message(telegram_id, "Набираю сообщение...")
-
+    try:
+        mes = await bot.send_message(telegram_id, "Набираю сообщение...")
+    except Exception as ex:
+        await bot.send_message(248184623, ex)
     response = await assistant.request(message, client_id, api_key=api_key)
-    await bot.delete_message(mes.chat.id, mes.message_id)
+    try:
+        await bot.delete_message(mes.chat.id, mes.message_id)
+    except Exception as ex:
+        await bot.send_message(248184623, ex)
     await salebot.sync_send_message(api_key=api_key, client_id=client_id, message=response)
 
 
