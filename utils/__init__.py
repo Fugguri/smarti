@@ -1,6 +1,6 @@
 import os
 # from .GPTService import GPTService
-from .AssistantService import AssistantService
+from .AssistantServiceds import AssistantService
 from .GoogleService import GoogleService
 from config import cfg
 from .SaleBotService import SalebotService
@@ -8,6 +8,6 @@ from .SaleBotService import SalebotService
 salebot = SalebotService()
 google = GoogleService()
 try:
-    assistant = AssistantService(api_key=cfg.tg_bot.openai)
+    assistant = AssistantServiceds(api_key=cfg.tg_bot.openai)
 except Exception as ex:
     print(ex)
