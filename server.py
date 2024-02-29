@@ -66,29 +66,32 @@ async def user(request_: Request):
 
 @app.post("/smarti")
 async def user(request_: Request):
-    print(await request_.body())
-    data = await request_.json()
-    client_id = data.get("user_id")
-    telegram_id = data.get("telegram_id")
-    message = Message(text=data.get("message"))
-    print(message)
-    api_key = data.get("api_key")
-    if not message.text:
-        return
-    if message.text == '/start':
-        await salebot.sync_send_message(api_key=api_key, client_id=client_id, message=config.misc.messages.start)
-        await assistant.request(message, client_id, start=True)
-        return
     try:
-        mes = await bot.send_message(telegram_id, "Набираю сообщение...")
+        print(await request_.body())
+        data = await request_.json()
+        client_id = data.get("user_id")
+        telegram_id = data.get("telegram_id")
+        message = Message(text=data.get("message"))
+        print(message)
+        api_key = data.get("api_key")
+        if not message.text:
+            return
+        if message.text == '/start':
+            await salebot.sync_send_message(api_key=api_key, client_id=client_id, message=config.misc.messages.start)
+            await assistant.request(message, client_id, start=True)
+            return
+        try:
+            mes = await bot.send_message(telegram_id, "Набираю сообщение...")
+        except Exception as ex:
+            await bot.send_message(248184623, ex)
+        response = await assistant.request(message, client_id, api_key=api_key)
+        try:
+            await bot.delete_message(mes.chat.id, mes.message_id)
+        except Exception as ex:
+            await bot.send_message(248184623, ex)
+        await salebot.sync_send_message(api_key=api_key, client_id=client_id, message=response)
     except Exception as ex:
         await bot.send_message(248184623, ex)
-    response = await assistant.request(message, client_id, api_key=api_key)
-    try:
-        await bot.delete_message(mes.chat.id, mes.message_id)
-    except Exception as ex:
-        await bot.send_message(248184623, ex)
-    await salebot.sync_send_message(api_key=api_key, client_id=client_id, message=response)
 
 
 if __name__ == "__main__":
