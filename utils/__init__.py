@@ -8,6 +8,6 @@ from .SaleBotService import SalebotService
 salebot = SalebotService()
 google = GoogleService()
 try:
-    assistant = AssistantServiceds(api_key=cfg.tg_bot.openai)
+    assistant = AssistantService(api_key=cfg.tg_bot.openai)
 except Exception as ex:
     print(ex)
