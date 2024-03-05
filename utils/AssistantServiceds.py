@@ -300,7 +300,7 @@ class AssistantService:
 
         run = self.openai.beta.threads.runs.create(
             thread_id=thread.id,
-            assistant_id="asst_OHLnf1PfycUAMsXw0oWnTEAs",
+            assistant_id="asst_ZWKfgFEZFI3bllu2hSCOjpSr",
         )
         if start:
             print("start")
