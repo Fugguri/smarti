@@ -1,5 +1,6 @@
 
 
+import asyncio
 import requests
 import aiohttp
 
@@ -24,7 +25,7 @@ class SalebotService:
         params = {"client_id": client_id, "variables": variables}
         url = self.base_url.format(api_key=api_key, action="save_variables")
         req = requests.post(url, json=params)
-        print(req.text)
+        print(req.content)
         return req
 
     async def sync_send_message(self, api_key, client_id, message: str):
@@ -42,3 +43,7 @@ class SalebotService:
         url = self.base_url.format(api_key=api_key, action="message")
         req = requests.post(url, json=params)
         return req
+
+
+if __name__ == "__main__":
+    sale = SalebotService()
