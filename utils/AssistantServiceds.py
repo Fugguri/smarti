@@ -256,7 +256,7 @@ class AssistantService:
 #             file_ids=[self.file1.id, self.file2.id]
 #         )
         self.assistant = self.openai.beta.assistants.retrieve(
-            "thread_M16QfXxhw79uQhY9nkOLkX5q")
+            "asst_ZWKfgFEZFI3bllu2hSCOjpSr")
         print(self.assistant.name)
         self.is_run_active = bool
 
