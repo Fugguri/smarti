@@ -255,7 +255,9 @@ class AssistantService:
 #             model="gpt-4-turbo-preview",
 #             file_ids=[self.file1.id, self.file2.id]
 #         )
-
+        self.assistant = self.openai.beta.assistants.retrieve(
+            "thread_M16QfXxhw79uQhY9nkOLkX5q")
+        print(self.assistant.name)
         self.is_run_active = bool
 
     def submin_function(self, thread, run, call):
@@ -300,7 +302,7 @@ class AssistantService:
 
         run = self.openai.beta.threads.runs.create(
             thread_id=thread.id,
-            assistant_id="thread_M16QfXxhw79uQhY9nkOLkX5q",
+            assistant_id=self.assistant.id,
         )
         if start:
             print("start")
