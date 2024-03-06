@@ -8,4 +8,4 @@ push:
 
 upgrade:
 	git pull 
-	python3 main.py
+	python3 server.py
