@@ -195,59 +195,59 @@ class AssistantService:
 # "                              ''',
 
 #             tools=[{"type": "retrieval"},
-#                    {"type": "function", "function": {
-#                        "name": "new_lead",
-#                        "parameters": {
-#                             "type": "object",
-#                             "properties": {
-#                                 "client.education_goal": {
-#                                     "type": "string",
-#                                     "description": "education_goal"
-#                                 },
-#                                 "client.work_with": {
-#                                     "type": "string",
-#                                     "description": "what category of people does he want to work with "
-#                                 },
-#                                 "client.Education_important": {
-#                                     "type": "string",
-#                                     "description": "what is important in learning"
-#                                 },
-#                                 "client.personal_improvements_goals": {
-#                                     "type": "string",
-#                                     "description": "Questions that he wants to solve in the process of personal development"
-#                                 },
-#                                 "client.budget_ii": {
-#                                     "type": "string",
-#                                     "description": "education budget"
-#                                 },
-#                                 "client.start_education": {
-#                                     "type": "string",
-#                                     "description": "when plan start educate"
-#                                 },
-#                                 "client.name": {
-#                                     "type": "string",
-#                                     "description": "lead name"
-#                                 },
-#                                 "client.phone": {
-#                                     "type": "string",
-#                                     "description": "lead phone"
-#                                 },
-#                                 "client.email": {
-#                                     "type": "string",
-#                                     "description": "lead email"
-#                                 },
+        #    {"type": "function", "function": {
+        #        "name": "new_lead",
+        #        "parameters": {
+        #             "type": "object",
+        #             "properties": {
+        #                 "client.education_goal": {
+        #                     "type": "string",
+        #                     "description": "education_goal"
+        #                 },
+        #                 "client.work_with": {
+        #                     "type": "string",
+        #                     "description": "what category of people does he want to work with "
+        #                 },
+        #                 "client.Education_important": {
+        #                     "type": "string",
+        #                     "description": "what is important in learning"
+        #                 },
+        #                 "client.personal_improvements_goals": {
+        #                     "type": "string",
+        #                     "description": "Questions that he wants to solve in the process of personal development"
+        #                 },
+        #                 "client.budget_ii": {
+        #                     "type": "string",
+        #                     "description": "education budget"
+        #                 },
+        #                 "client.start_education": {
+        #                     "type": "string",
+        #                     "description": "when plan start educate"
+        #                 },
+        #                 "client.name": {
+        #                     "type": "string",
+        #                     "description": "lead name"
+        #                 },
+        #                 "client.phone": {
+        #                     "type": "string",
+        #                     "description": "lead phone"
+        #                 },
+        #                 "client.email": {
+        #                     "type": "string",
+        #                     "description": "lead email"
+        #                 },
 
-#                             },
-#                            "required": [
-#                                 "name",
-#                                 "phone",
-#                                 "email",
-#                                 "budget",
-#                                 "education_goal",
-#                                 "start_education",
-#                                 "free_consultation"
-#                             ]
-#                        },
+        #             },
+        #            "required": [
+        #                 "name",
+        #                 "phone",
+        #                 "email",
+        #                 "budget",
+        #                 "education_goal",
+        #                 "start_education",
+        #                 "free_consultation"
+        #             ]
+        #        },
 #                        "description": "Create new lead"
 #                    }}
 #                    ],
@@ -256,7 +256,7 @@ class AssistantService:
 #             file_ids=[self.file1.id, self.file2.id]
 #         )
         self.assistant = self.openai.beta.assistants.retrieve(
-            "asst_ZWKfgFEZFI3bllu2hSCOjpSr")
+            "asst_2XNAfX7weQ5iGFbWSAUOt8p4")
         print(self.assistant.name)
         self.is_run_active = bool
 
