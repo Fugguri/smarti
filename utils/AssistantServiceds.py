@@ -102,7 +102,7 @@ class AssistantService:
                 continue
 
             await self.token_saver.asave_tokens_usage(
-                tokens=int(tokens.total_tokens.real), project_id=2, project_name="поиск психолога")
+                tokens=int(tokens.total_tokens.real), project_id=1, project_name="Смартик")
 
             counter += 1
             action = retrieve.required_action
