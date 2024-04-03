@@ -1,7 +1,7 @@
 import os
 # from .GPTService import GPTService
 from .AssistantServiceds import AssistantService
-from .GoogleService import GoogleService
+# from .GoogleService import GoogleService
 from config import cfg
 from .SaleBotService import SalebotService
 # gpt_service = GPTService(api_key=cfg.tg_bot.openai)
