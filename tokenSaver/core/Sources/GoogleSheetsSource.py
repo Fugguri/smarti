@@ -20,7 +20,7 @@ class GoogleSheetsSource(BaseTokenSaverSource):
         if not record:
             record = self._create_record()
         row = self.sheet.row_values(record.row)
-        return RecordRow(row[0:4], record.row)
+        return RecordRow(row[0], row[1], row[2], row[3], row[4], record.row)
 
     def _save(self, project_id: int | str = None, project_name: str = None, tokens=None):
         record: RecordRow = self._get_record(
