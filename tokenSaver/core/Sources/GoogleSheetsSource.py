@@ -30,7 +30,10 @@ class GoogleSheetsSource(BaseTokenSaverSource):
         return record
 
     def save(self, project_id: int | str = None, project_name: str = None, tokens=None):
-        return self._save(project_id, project_name, tokens)
+        try:
+            return self._save(project_id, project_name, tokens)
+        except Exception as ex:
+            print(ex)
 
     def _create_record(self):
         self.sheet.append_row(
