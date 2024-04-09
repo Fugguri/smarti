@@ -97,9 +97,9 @@ class AssistantService:
             )
             print(counter)
             tokens = retrieve.usage
-
+            print(retrieve)
             if not tokens:
-                continue
+                await asyncio.sleep(2)
 
             await self.token_saver.asave_tokens_usage(
                 tokens=int(tokens.total_tokens.real), project_id=1, project_name="Смартик")
@@ -117,7 +117,6 @@ class AssistantService:
                 print(self.submin_function(
                     thread, run, action.submit_tool_outputs.tool_calls[0]))
             status = retrieve.completed_at
-            await asyncio.sleep(2)
 
         messages = self.openai.beta.threads.messages.list(
             thread_id=thread.id
