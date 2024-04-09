@@ -97,12 +97,6 @@ class AssistantService:
             )
             print(counter)
             tokens = retrieve.usage
-            print(retrieve)
-            if not tokens:
-                await asyncio.sleep(2)
-
-            await self.token_saver.asave_tokens_usage(
-                tokens=int(tokens.total_tokens.real), project_id=1, project_name="Смартик")
 
             counter += 1
             action = retrieve.required_action
@@ -116,7 +110,15 @@ class AssistantService:
                 # await google.save_lead(lead)
                 print(self.submin_function(
                     thread, run, action.submit_tool_outputs.tool_calls[0]))
+
             status = retrieve.completed_at
+            await asyncio.sleep(2)
+
+            if not tokens:
+                continue
+
+            await self.token_saver.asave_tokens_usage(
+                tokens=int(tokens.total_tokens.real), project_id=1, project_name="Смартик")
 
         messages = self.openai.beta.threads.messages.list(
             thread_id=thread.id
